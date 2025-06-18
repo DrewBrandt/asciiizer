@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const AsciiCleanerApp());
 }
+
 //comment
 class AsciiCleanerApp extends StatelessWidget {
   const AsciiCleanerApp({super.key});
@@ -72,31 +73,75 @@ class _AsciiCleanerHomePageState extends State<AsciiCleanerHomePage> {
       case 'à':
       case 'ä':
       case 'â':
+      case 'å':
+      case 'ã':
+      case 'ā':
+      case 'ă':
+      case 'ą':
         return 'a';
+
       case 'é':
       case 'è':
       case 'ë':
       case 'ê':
+      case 'ē':
+      case 'ė':
+      case 'ę':
         return 'e';
+
       case 'í':
       case 'ì':
       case 'ï':
       case 'î':
+      case 'ī':
+      case 'į':
         return 'i';
+
       case 'ó':
       case 'ò':
       case 'ö':
       case 'ô':
+      case 'õ':
+      case 'ő':
+      case 'ō':
         return 'o';
+
       case 'ú':
       case 'ù':
       case 'ü':
       case 'û':
+      case 'ų':
+      case 'ū':
         return 'u';
+
       case 'ñ':
         return 'n';
+
       case 'ç':
         return 'c';
+
+      case 'ß':
+        return 'ss';
+
+      case 'œ':
+        return 'oe';
+
+      case 'æ':
+        return 'ae';
+
+      case '½':
+        return '1/2';
+
+      case '×':
+        return 'x';
+
+      case '‼':
+        return '!!';
+
+      case '–': // en dash
+      case '—': // em dash
+        return '-';
+
       default:
         return '?';
     }
@@ -159,7 +204,7 @@ class _AsciiCleanerHomePageState extends State<AsciiCleanerHomePage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  '\"$char\" (U+$codePoint) → ',
+                                  '"${char}" (U+$codePoint) → ',
                                   style: const TextStyle(
                                     fontFamily: 'monospace',
                                   ),
@@ -167,8 +212,16 @@ class _AsciiCleanerHomePageState extends State<AsciiCleanerHomePage> {
                                 Expanded(
                                   child: TextField(
                                     controller: entry.value,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       hintText: 'Replacement',
+                                      filled:
+                                          entry.value.text == '?'
+                                              ? true
+                                              : false,
+                                      fillColor:
+                                          entry.value.text == '?'
+                                              ? Colors.red.withOpacity(0.2)
+                                              : null,
                                     ),
                                   ),
                                 ),
